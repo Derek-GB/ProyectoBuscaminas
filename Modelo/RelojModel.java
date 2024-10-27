@@ -11,16 +11,43 @@ import java.time.LocalTime;
  * @author Tony
  */
 public class RelojModel {
+
     private static RelojModel reloj;
-    
     private LocalTime tiempoActual;
     private boolean corriendo;
+
     
-    
-     public static RelojModel () {
+    public void iniciar() {
+        if (!corriendo) {
+            this.tiempoActual = LocalTime.now();
+            corriendo = true;
+        }
+    }
+
+    public void detener() {
+        if (corriendo) {
+            corriendo = false;
+        }
+    }
+
+    public void reiniciar() {
+        this.tiempoActual = LocalTime.now();
+        corriendo = true;
+    }
+
+    private RelojModel() {
+        this.tiempoActual = LocalTime.now();
+        this.corriendo = false;
+    }
+
+    public static RelojModel getinstance() {
         if (reloj == null) {
             reloj = new RelojModel();
         }
         return reloj;
-     }
+    }
+
+    public LocalTime getTiempoActual() {
+        return tiempoActual;
+    }
 }
