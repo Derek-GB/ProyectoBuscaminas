@@ -9,11 +9,11 @@ package Modelo;
  * @author Fernando
  */
 public class Tablero {
-    
+
     private Casilla[][] casillas;
     private int totalMinas;
-    private final int filas = 12; 
-    private final int columnas = 12; 
+    private final int filas = 12;
+    private final int columnas = 12;
 
     public Tablero() {
         this.totalMinas = 30;
@@ -80,5 +80,27 @@ public class Tablero {
             casillas[fila][columna].marcar();
         }
     }
-    
+
+    public boolean hayMinasDestapadas() {
+        for (Casilla[] casilla : casillas) {
+            for (Casilla casilla1 : casilla) {
+                if (casilla1.isEsMina() && casilla1.getEstado() == Estado.DESTAPADA) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean hayCasillasSinDestapar() {
+        for (Casilla[] casilla : casillas) {
+            for (Casilla casilla1 : casilla) {
+                if (casilla1.getEstado() == Estado.CERRADA) {
+                    return true; 
+                }
+            }
+        }
+        return false; 
+    }
+
 }
