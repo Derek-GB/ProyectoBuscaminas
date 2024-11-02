@@ -24,7 +24,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     public FrmBuscaMinas() {
         initComponents();
         casillas = new JLabel[12][12];
-        inicializarCasillas();
+        iniciarCasillas();
         añadirEscuchador();
     }
 
@@ -403,7 +403,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         el mouse Clicked, este revisa cual de los dos clics se hizo y en base a eso actua*/
         switch (e.getButton()) {
             case (MouseEvent.BUTTON1) -> {
-                controlador.manejarDestapadoCasilla(posicion[0], posicion[1]);
+                controlador.manejarDestapadoCasilla(posicion[0],posicion[1]);
 
             }
             case (MouseEvent.BUTTON3) -> {
@@ -454,31 +454,6 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         return new int[]{fila, columna};
     }
 
-    private void inicializarCasillas() {
-        int labelCount = 1;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                try {
-                    casillas[i][j] = (JLabel) this.getClass().getDeclaredField("jLabel" + labelCount).get(this);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                labelCount++;
-            }
-        }
-
-    }
-
-    public void mostrarFinDeJuego(String resultado) {
-        boolean victoria = resultado.equals("Ganaste");
-        FrmFinal frmFinal = new FrmFinal(this, true);
-        frmFinal.setVictoria(victoria); 
-        frmFinal.setVisible(true);
-    }
-    //Metodo para que se revisar csi termino el juego (según yo)
-    public void verificarFinDeJuego() {
-        controlador.verificarFinDeJuego();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

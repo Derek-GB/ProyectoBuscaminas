@@ -100,11 +100,11 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
         vista.actualizarVista(tablero);
     }
 
-    public void verificarFinDeJuego() {
+    private void verificarFinDeJuego() {
         if (tablero.hayMinasDestapadas()) {
-            vista.mostrarFinDeJuego("Perdiste");
+            vista.mostrarFinDeJuego("¡Perdiste!");
         } else if (tablero.hayCasillasSinDestapar()) {
-            vista.mostrarFinDeJuego("Ganaste");
+            vista.mostrarFinDeJuego("¡Ganaste!");
         }
     }
 
