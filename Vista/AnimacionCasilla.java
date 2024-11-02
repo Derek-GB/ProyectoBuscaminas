@@ -55,7 +55,7 @@ public class AnimacionCasilla extends Thread {
         for (int i = 0; i < frames; i++) {
             ajustarImagen(direcciones[i], label);
             try {
-                Thread.sleep(125);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
             }
         }

@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.BuscaMinasController;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 
@@ -11,9 +13,10 @@ import javax.swing.JLabel;
  *
  * @author d2tod
  */
-public class FrmBuscaMinas extends javax.swing.JFrame {
+public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 
     JLabel[][] casillas;
+    BuscaMinasController controlador;
 
     /**
      * Creates new form FrmBuscaMinas
@@ -21,12 +24,14 @@ public class FrmBuscaMinas extends javax.swing.JFrame {
     public FrmBuscaMinas() {
         initComponents();
         casillas = new JLabel[12][12];
+        iniciarCasillas();
+        añadirEscuchador();
     }
 
-    public void añadirEscuchador(MouseListener escuchador) {
+    private void añadirEscuchador() {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                casillas[i][j].addMouseListener(escuchador);
+                casillas[i][j].addMouseListener(this);
             }
         }
     }
@@ -353,40 +358,102 @@ public class FrmBuscaMinas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new FrmBuscaMinas().setVisible(true);
+//            }
+//        });
+//    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        JLabel label = (JLabel) e.getSource();
+        int[] posicion = obtenerPosicion(label);
+        if (posicion[0] == -1 || posicion[1] == -1) {
+            throw new UnsupportedOperationException("Wey, tenemos problemas");
+        }
+        /*Estos eventos de mouse es por el MouseListener, pero solo se necesita
+        el mouse Clicked, este revisa cual de los dos clics se hizo y en base a eso actua*/
+        switch (e.getButton()) {
+            case (MouseEvent.BUTTON1) -> {
+                controlador.manejarDestapadoCasilla(posicion[0],posicion[1]);
+
+            }
+            case (MouseEvent.BUTTON3) -> {
+                controlador.manejarMarcadoCasilla(posicion[0], posicion[1]);
+
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    public boolean trySetControlador(BuscaMinasController controlador) {
+        if (this.controlador == null) {
+            this.controlador = controlador;
+            return true;
+        }
+        return false;
+    }
+
+    private int[] obtenerPosicion(JLabel label) {
+        int fila = -1, columna = -1;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (casillas[i][j].equals(label)) {
+                    fila = i;
+                    columna = j;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmBuscaMinas().setVisible(true);
-            }
-        });
+        return new int[]{fila, columna};
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
