@@ -2,15 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Vista;
 
 import java.time.LocalTime;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Tony
  */
-public class RelojModel extends Thread {
+public class Reloj extends Thread {
+
+    private JLabel label;
+    private static Reloj reloj;
+    private LocalTime tiempoActual;
+    private boolean corriendo;
 
     public void run() {
         for (int h = 0; h <= 12; h++) {
@@ -19,20 +25,21 @@ public class RelojModel extends Thread {
                     String strH = h < 10 ? "0" + h : h + "";
                     String strM = m < 10 ? "0" + m : m + "";
                     String strS = s < 10 ? "0" + s : s + "";
-                    JFReloj.etiReloj.SetTex(strH+":"+strM+":"+strS);
-                    try{
+                    label.setText(strH + ":" + strM + ":" + strS);
+                    try {
                         Thread.sleep(1000);
-                    }catch(Exception e){
-                        
+                    } catch (Exception e) {
+
                     }
                 }
             }
         }
     }
 
-    private static RelojModel reloj;
-    private LocalTime tiempoActual;
-    private boolean corriendo;
+    public void setLabel(JLabel label) {
+        this.label = label;
+
+    }
 
     public void iniciar() {
         if (!corriendo) {
@@ -52,14 +59,14 @@ public class RelojModel extends Thread {
         corriendo = true;
     }
 
-    private RelojModel() {
+    private Reloj() {
         this.tiempoActual = LocalTime.now();
         this.corriendo = false;
     }
 
-    public static RelojModel getinstance() {
+    public static Reloj getinstance() {
         if (reloj == null) {
-            reloj = new RelojModel();
+            reloj = new Reloj();
         }
         return reloj;
     }
