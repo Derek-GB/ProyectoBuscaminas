@@ -7,11 +7,12 @@ package Controlador;
 //import Interfaces.Observable;
 import Interfaces.Observador;
 import Modelo.Casilla;
+import Modelo.Estado;
 import Modelo.Tablero;
+import Vista.AnimacionCasilla;
 import Vista.FrmBuscaMinas;
 //import java.awt.event.MouseEvent;
 //import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 /**
  *
@@ -19,15 +20,14 @@ import java.util.ArrayList;
  */
 public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
-    private ArrayList<Observador> observadores;
-    
+
     private Tablero tablero;
     private FrmBuscaMinas vista;
 
     public BuscaMinasController(FrmBuscaMinas vista) {
-        this.observadores = new ArrayList<>();
         this.vista = vista;
         this.tablero = new Tablero();
+        this.tablero.añadirObservador(this);
     }
 
     public void iniciarJuego() {
@@ -36,19 +36,20 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
     }
 
     @Override
-    public boolean RecibirSeñal(Object señal) {
-        ((Casilla)señal).
+    public boolean RecibirSeñal(Object señal, int[] posicion) {
+        if (señal instanceof Casilla casilla) {
+            (new AnimacionCasilla(vista.getCasilla(posicion), casilla.getEstado(), casilla.isEsMina(), casilla.getNumero())).start();
+            return true;
+        }
+        return false;
     }
 
-    
-    
 //    @Override
 //    public void emitirSeñal(Object señal) {
 //        for (Observador observador : observadores) {
 //            observador.RecibirSeñal(señal);
 //        }
 //    }
-
 //    @Override
 //    public boolean añadirObservador(Observador observador) {
 //        if (!observadores.contains(observador)) {
@@ -57,7 +58,6 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 //        }
 //        return false;
 //    }
-
 //    @Override
 //    public void mouseClicked(MouseEvent e) {
 //        /*Estos eventos de mouse es por el MouseListener, pero solo se necesita
@@ -89,18 +89,17 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 //    @Override
 //    public void mouseExited(MouseEvent e) {
 //    }
-
     public void manejarMarcadoCasilla(int fila, int columna) {
         tablero.marcarCasilla(fila, columna);
         vista.actualizarVista(tablero);
     }
-    
+
     public void manejarDestapadoCasilla(int fila, int columna) {
         tablero.destaparCasilla(fila, columna);
         vista.actualizarVista(tablero);
     }
 
-   public void verificarFinDeJuego() {
+    public void verificarFinDeJuego() {
         if (tablero.hayMinasDestapadas()) {
             vista.mostrarFinDeJuego("Perdiste");
         } else if (tablero.hayCasillasSinDestapar()) {

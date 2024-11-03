@@ -394,23 +394,31 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 //    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        JLabel label = (JLabel) e.getSource();
-        int[] posicion = obtenerPosicion(label);
-        if (posicion[0] == -1 || posicion[1] == -1) {
-            throw new UnsupportedOperationException("Wey, tenemos problemas");
-        }
-        /*Estos eventos de mouse es por el MouseListener, pero solo se necesita
+        if (e.getSource() instanceof JLabel label) {
+            int[] posicion = obtenerPosicion(label);
+            if (posicion[0] == -1 || posicion[1] == -1) {
+                throw new UnsupportedOperationException("Wey, tenemos problemas");
+            }
+            /*Estos eventos de mouse es por el MouseListener, pero solo se necesita
         el mouse Clicked, este revisa cual de los dos clics se hizo y en base a eso actua*/
-        switch (e.getButton()) {
-            case (MouseEvent.BUTTON1) -> {
-                controlador.manejarDestapadoCasilla(posicion[0], posicion[1]);
+            switch (e.getButton()) {
+                case (MouseEvent.BUTTON1) -> {
+                    
+                    controlador.manejarDestapadoCasilla(posicion[0], posicion[1]);
 
-            }
-            case (MouseEvent.BUTTON3) -> {
-                controlador.manejarMarcadoCasilla(posicion[0], posicion[1]);
-
+                }
+                case (MouseEvent.BUTTON3) -> {
+                    controlador.manejarMarcadoCasilla(posicion[0], posicion[1]);
+                }
             }
         }
+    }
+    
+    public JLabel getCasilla(int[] posicion){
+        if(posicion != null && posicion.length == 2){
+            return casillas[posicion[0]][posicion[1]];
+        }
+        return null;
     }
 
     @Override

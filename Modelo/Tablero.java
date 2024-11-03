@@ -4,12 +4,17 @@
  */
 package Modelo;
 
+import Interfaces.Observable;
+import Interfaces.Observador;
+import java.util.ArrayList;
+
 /**
  *
  * @author Fernando
  */
-public class Tablero {
+public class Tablero implements Observable {
 
+    private ArrayList<Observador> observadores;
     private Casilla[][] casillas;
     private int totalMinas;
     private final int filas = 12;
@@ -42,9 +47,26 @@ public class Tablero {
         }
     }
 
+    @Override
+    public void emitirSeñal(Object señal, int[] posicion) {
+        for (Observador observador : observadores) {
+            observador.RecibirSeñal(señal, posicion);
+        }
+    }
+
+    @Override
+    public boolean añadirObservador(Observador observador) {
+        if (!observadores.contains(observador)) {
+            observadores.add(observador);
+            return true;
+        }
+        return false;
+    }
+
     public void destaparCasilla(int fila, int columna) {
         if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
             casillas[fila][columna].destapar();
+            emitirSeñal(casillas[fila][columna],new int[]{fila,columna});
             int minasCircundantes = contarMinasCircundantes(fila, columna);
             casillas[fila][columna].establecerNumero(minasCircundantes);
             if (minasCircundantes == 0) {
@@ -78,6 +100,7 @@ public class Tablero {
     public void marcarCasilla(int fila, int columna) {
         if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
             casillas[fila][columna].marcar();
+            emitirSeñal(casillas[fila][columna],new int[]{fila,columna});
         }
     }
 
@@ -96,11 +119,11 @@ public class Tablero {
         for (Casilla[] casilla : casillas) {
             for (Casilla casilla1 : casilla) {
                 if (casilla1.getEstado() == Estado.CERRADA) {
-                    return true; 
+                    return true;
                 }
             }
         }
-        return false; 
+        return false;
     }
 
 }

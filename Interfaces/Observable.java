@@ -9,6 +9,6 @@ package Interfaces;
  * @author d2tod
  */
 public interface Observable {
-    public void emitirSeñal(Object señal);
+    public void emitirSeñal(Object señal, int[] posicion);
     public boolean añadirObservador(Observador observador);
 }

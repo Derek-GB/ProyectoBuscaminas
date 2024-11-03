@@ -7,6 +7,7 @@ package Vista;
 import Modelo.Estado;
 import Vista.Imagenes.RutasImagenes;
 import java.awt.Image;
+import java.util.HashMap;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ import javax.swing.JLabel;
  * @author d2tod
  */
 public class AnimacionCasilla extends Thread {
-
+    private static HashMap<String,Icon> sprites = new HashMap<>();
     private JLabel label;
     private Estado estado;
     private boolean esMina;
@@ -106,8 +107,12 @@ public class AnimacionCasilla extends Thread {
     }
 
     private void ajustarImagen(String ubicacion, javax.swing.JLabel label) {
+        Icon icon = sprites.get(ubicacion);
+        if(icon == null){
         ImageIcon image = new ImageIcon(getClass().getResource(ubicacion));
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-        label.setIcon(icon);
+        icon = new ImageIcon(image.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+        sprites.put(ubicacion, icon);
+        }
+        label.setIcon(icon); 
     }
 }

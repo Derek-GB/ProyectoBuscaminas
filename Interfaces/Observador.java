@@ -9,5 +9,5 @@ package Interfaces;
  * @author d2tod
  */
 public interface Observador {
-    public boolean RecibirSeñal(Object señal);
+    public boolean RecibirSeñal(Object señal, int[] posicion);
 }
