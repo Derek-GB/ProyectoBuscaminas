@@ -27,6 +27,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         casillas = new JLabel[12][12];
         inicializarCasillas();
         añadirEscuchador();
+        reloj = Reloj.getinstance();
     }
 
     private void añadirEscuchador() {
@@ -415,6 +416,9 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 //    }
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (reloj == null) {
+            iniciarReloj();
+        }
         if (e.getSource() instanceof JLabel label) {
             int[] posicion = obtenerPosicion(label);
             if (posicion[0] == -1 || posicion[1] == -1) {
@@ -424,7 +428,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         el mouse Clicked, este revisa cual de los dos clics se hizo y en base a eso actua*/
             switch (e.getButton()) {
                 case (MouseEvent.BUTTON1) -> {
-                    
+
                     controlador.manejarDestapadoCasilla(posicion[0], posicion[1]);
 
                 }
@@ -433,13 +437,18 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
                 }
             }
         }
+
     }
-    
-    public JLabel getCasilla(int[] posicion){
-        if(posicion != null && posicion.length == 2){
+
+    public JLabel getCasilla(int[] posicion) {
+        if (posicion != null && posicion.length == 2) {
             return casillas[posicion[0]][posicion[1]];
         }
         return null;
+    }
+
+    public void iniciarReloj() {
+        reloj.start();
     }
 
     @Override

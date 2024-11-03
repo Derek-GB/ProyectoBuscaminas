@@ -41,12 +41,12 @@ public class Reloj extends Thread {
 
     }
 
-    public void iniciar() {
-        if (!corriendo) {
-            this.tiempoActual = LocalTime.now();
-            corriendo = true;
-        }
-    }
+//    public void iniciar() {
+//        if (!corriendo) {
+//            this.tiempoActual = LocalTime.now();
+//            corriendo = true;
+//        }
+//    }
 
     public void detener() {
         if (corriendo) {
