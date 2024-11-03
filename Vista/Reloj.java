@@ -17,7 +17,8 @@ public class Reloj extends Thread {
     private static Reloj reloj;
     private LocalTime tiempoActual;
     private boolean corriendo;
-
+    
+    @Override
     public void run() {
         for (int h = 0; h <= 12; h++) {
             for (int m = 0; m < 60; m++) {

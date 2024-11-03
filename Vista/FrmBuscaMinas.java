@@ -37,6 +37,14 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
             }
         }
     }
+    
+    private void reiniciarCasillas() {
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                casillas[i][j].setIcon(null);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -377,6 +385,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
         controlador.reiniciarJuego();
+        reiniciarCasillas();
         reloj.reiniciar();
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
@@ -448,6 +457,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     }
 
     public void iniciarReloj() {
+        reloj.setLabel(LabRejoj);
         reloj.start();
     }
 
