@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.BuscaMinasController;
+import Modelo.Estado;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         inicializarCasillas();
         añadirEscuchador();
         reloj = Reloj.getinstance();
+        (new AnimacionCasilla(labIcon,Estado.MARCADA,false,0)).start();
     }
 
     private void añadirEscuchador() {
@@ -55,7 +57,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        LabContadorBanderas = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -203,163 +205,165 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         tablero = new javax.swing.JLabel();
         LabRejoj = new javax.swing.JLabel();
         btnReiniciar = new javax.swing.JButton();
+        jLabel145 = new javax.swing.JLabel();
+        labIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 30, 30));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 30, 30));
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 30, 30));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 30, 30));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 30, 30));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 30, 30));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 30, 30));
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 30, 30));
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 30, 30));
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 30, 30));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 30, 30));
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 30, 30));
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 30, 30));
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 30, 30));
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 30, 30));
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 30, 30));
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 30, 30));
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 30, 30));
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 30, 30));
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 30, 30));
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 30, 30));
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 30, 30));
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 30, 30));
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 30, 30));
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 30, 30));
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 30, 30));
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 30, 30));
-        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 30, 30));
-        jPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 30, 30));
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 30, 30));
-        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 30, 30));
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 30, 30));
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 30, 30));
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 30, 30));
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 30, 30));
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 30, 30));
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 30, 30));
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 30, 30));
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 30, 30));
-        jPanel1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 30, 30));
-        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 30, 30));
-        jPanel1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 30, 30));
-        jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 30, 30));
-        jPanel1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 30, 30));
-        jPanel1.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 30, 30));
-        jPanel1.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 30, 30));
-        jPanel1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 30, 30));
-        jPanel1.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 30, 30));
-        jPanel1.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 30, 30));
-        jPanel1.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 30, 30));
-        jPanel1.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 30, 30));
-        jPanel1.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 30, 30));
-        jPanel1.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 30, 30));
-        jPanel1.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 30, 30));
-        jPanel1.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 30, 30));
-        jPanel1.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 30, 30));
-        jPanel1.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 30, 30));
-        jPanel1.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 30, 30));
-        jPanel1.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 30, 30));
-        jPanel1.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 30, 30));
-        jPanel1.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 30, 30));
-        jPanel1.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 30, 30));
-        jPanel1.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 30, 30));
-        jPanel1.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 30, 30));
-        jPanel1.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 30, 30));
-        jPanel1.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 30, 30));
-        jPanel1.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 30, 30));
-        jPanel1.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 30, 30));
-        jPanel1.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 30, 30));
-        jPanel1.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 30, 30));
-        jPanel1.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 30, 30));
-        jPanel1.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 30, 30));
-        jPanel1.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 30, 30));
-        jPanel1.add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 30, 30));
-        jPanel1.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 30, 30));
-        jPanel1.add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 30, 30));
-        jPanel1.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 30, 30));
-        jPanel1.add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 30, 30));
-        jPanel1.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 30, 30));
-        jPanel1.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 30, 30));
-        jPanel1.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 30, 30));
-        jPanel1.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 30, 30));
-        jPanel1.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 30, 30));
-        jPanel1.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 30, 30));
-        jPanel1.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 30, 30));
-        jPanel1.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 30, 30));
-        jPanel1.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 30, 30));
-        jPanel1.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 30, 30));
-        jPanel1.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 30, 30));
-        jPanel1.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 30, 30));
-        jPanel1.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 30, 30));
-        jPanel1.add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 30, 30));
-        jPanel1.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 30, 30));
-        jPanel1.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 30, 30));
-        jPanel1.add(jLabel95, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 30, 30));
-        jPanel1.add(jLabel96, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 30, 30));
-        jPanel1.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 30, 30));
-        jPanel1.add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 30, 30));
-        jPanel1.add(jLabel99, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 30, 30));
-        jPanel1.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 30, 30));
-        jPanel1.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 30, 30));
-        jPanel1.add(jLabel102, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 30, 30));
-        jPanel1.add(jLabel103, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 30, 30));
-        jPanel1.add(jLabel104, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 30, 30));
-        jPanel1.add(jLabel105, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 30, 30));
-        jPanel1.add(jLabel106, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 30, 30));
-        jPanel1.add(jLabel107, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 30, 30));
-        jPanel1.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 30, 30));
-        jPanel1.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 30, 30));
-        jPanel1.add(jLabel110, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 30, 30));
-        jPanel1.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 30, 30));
-        jPanel1.add(jLabel112, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 30, 30));
-        jPanel1.add(jLabel113, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 30, 30));
-        jPanel1.add(jLabel114, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 30, 30));
-        jPanel1.add(jLabel115, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 30, 30));
-        jPanel1.add(jLabel116, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 30, 30));
-        jPanel1.add(jLabel117, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 30, 30));
-        jPanel1.add(jLabel118, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 30, 30));
-        jPanel1.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 30, 30));
-        jPanel1.add(jLabel120, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 30, 30));
-        jPanel1.add(jLabel121, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 30, 30));
-        jPanel1.add(jLabel122, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 30, 30));
-        jPanel1.add(jLabel123, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 30, 30));
-        jPanel1.add(jLabel124, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 30, 30));
-        jPanel1.add(jLabel125, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 30, 30));
-        jPanel1.add(jLabel126, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 30, 30));
-        jPanel1.add(jLabel127, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 30, 30));
-        jPanel1.add(jLabel128, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 30, 30));
-        jPanel1.add(jLabel129, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 30, 30));
-        jPanel1.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 30, 30));
-        jPanel1.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 30, 30));
-        jPanel1.add(jLabel132, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 30, 30));
-        jPanel1.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 30, 30));
-        jPanel1.add(jLabel134, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 30, 30));
-        jPanel1.add(jLabel135, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 30, 30));
-        jPanel1.add(jLabel136, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 30, 30));
-        jPanel1.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 30, 30));
-        jPanel1.add(jLabel138, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 30, 30));
-        jPanel1.add(jLabel139, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 30, 30));
-        jPanel1.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 30, 30));
-        jPanel1.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 30, 30));
-        jPanel1.add(jLabel142, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 30, 30));
-        jPanel1.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 30, 30));
-        jPanel1.add(jLabel144, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 30, 30));
+        LabContadorBanderas.setBackground(new java.awt.Color(204, 255, 255));
+        LabContadorBanderas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        LabContadorBanderas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 30, 30));
+        LabContadorBanderas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 30, 30));
+        LabContadorBanderas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 30, 30));
+        LabContadorBanderas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 30, 30));
+        LabContadorBanderas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 30, 30));
+        LabContadorBanderas.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 30, 30));
+        LabContadorBanderas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 30, 30));
+        LabContadorBanderas.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 30, 30));
+        LabContadorBanderas.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 30, 30));
+        LabContadorBanderas.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 30, 30));
+        LabContadorBanderas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 30, 30));
+        LabContadorBanderas.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 30, 30));
+        LabContadorBanderas.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 30, 30));
+        LabContadorBanderas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 30, 30));
+        LabContadorBanderas.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 30, 30));
+        LabContadorBanderas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 30, 30));
+        LabContadorBanderas.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 30, 30));
+        LabContadorBanderas.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 30, 30));
+        LabContadorBanderas.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 30, 30));
+        LabContadorBanderas.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 30, 30));
+        LabContadorBanderas.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 30, 30));
+        LabContadorBanderas.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 30, 30));
+        LabContadorBanderas.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 30, 30));
+        LabContadorBanderas.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 30, 30));
+        LabContadorBanderas.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 30, 30));
+        LabContadorBanderas.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 30, 30));
+        LabContadorBanderas.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 30, 30));
+        LabContadorBanderas.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 30, 30));
+        LabContadorBanderas.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 30, 30));
+        LabContadorBanderas.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 30, 30));
+        LabContadorBanderas.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 30, 30));
+        LabContadorBanderas.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 30, 30));
+        LabContadorBanderas.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 30, 30));
+        LabContadorBanderas.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 30, 30));
+        LabContadorBanderas.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 30, 30));
+        LabContadorBanderas.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 30, 30));
+        LabContadorBanderas.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 30, 30));
+        LabContadorBanderas.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 30, 30));
+        LabContadorBanderas.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 30, 30));
+        LabContadorBanderas.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 30, 30));
+        LabContadorBanderas.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 30, 30));
+        LabContadorBanderas.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 30, 30));
+        LabContadorBanderas.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 30, 30));
+        LabContadorBanderas.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 30, 30));
+        LabContadorBanderas.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 30, 30));
+        LabContadorBanderas.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 30, 30));
+        LabContadorBanderas.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 30, 30));
+        LabContadorBanderas.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 30, 30));
+        LabContadorBanderas.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 30, 30));
+        LabContadorBanderas.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 30, 30));
+        LabContadorBanderas.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 30, 30));
+        LabContadorBanderas.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 30, 30));
+        LabContadorBanderas.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 30, 30));
+        LabContadorBanderas.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 30, 30));
+        LabContadorBanderas.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 30, 30));
+        LabContadorBanderas.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 30, 30));
+        LabContadorBanderas.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 30, 30));
+        LabContadorBanderas.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 30, 30));
+        LabContadorBanderas.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 30, 30));
+        LabContadorBanderas.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 30, 30));
+        LabContadorBanderas.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 30, 30));
+        LabContadorBanderas.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 30, 30));
+        LabContadorBanderas.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 30, 30));
+        LabContadorBanderas.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 30, 30));
+        LabContadorBanderas.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 30, 30));
+        LabContadorBanderas.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 30, 30));
+        LabContadorBanderas.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 30, 30));
+        LabContadorBanderas.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 30, 30));
+        LabContadorBanderas.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 30, 30));
+        LabContadorBanderas.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 30, 30));
+        LabContadorBanderas.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 30, 30));
+        LabContadorBanderas.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 30, 30));
+        LabContadorBanderas.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 30, 30));
+        LabContadorBanderas.add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 30, 30));
+        LabContadorBanderas.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 30, 30));
+        LabContadorBanderas.add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 30, 30));
+        LabContadorBanderas.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 30, 30));
+        LabContadorBanderas.add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 30, 30));
+        LabContadorBanderas.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 30, 30));
+        LabContadorBanderas.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 30, 30));
+        LabContadorBanderas.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 30, 30));
+        LabContadorBanderas.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 30, 30));
+        LabContadorBanderas.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 30, 30));
+        LabContadorBanderas.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 30, 30));
+        LabContadorBanderas.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 30, 30));
+        LabContadorBanderas.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 30, 30));
+        LabContadorBanderas.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 30, 30));
+        LabContadorBanderas.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 30, 30));
+        LabContadorBanderas.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 30, 30));
+        LabContadorBanderas.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 30, 30));
+        LabContadorBanderas.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 30, 30));
+        LabContadorBanderas.add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 30, 30));
+        LabContadorBanderas.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 30, 30));
+        LabContadorBanderas.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 30, 30));
+        LabContadorBanderas.add(jLabel95, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 30, 30));
+        LabContadorBanderas.add(jLabel96, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 30, 30));
+        LabContadorBanderas.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 30, 30));
+        LabContadorBanderas.add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 30, 30));
+        LabContadorBanderas.add(jLabel99, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 30, 30));
+        LabContadorBanderas.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 30, 30));
+        LabContadorBanderas.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 30, 30));
+        LabContadorBanderas.add(jLabel102, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 30, 30));
+        LabContadorBanderas.add(jLabel103, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 30, 30));
+        LabContadorBanderas.add(jLabel104, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 30, 30));
+        LabContadorBanderas.add(jLabel105, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 30, 30));
+        LabContadorBanderas.add(jLabel106, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 30, 30));
+        LabContadorBanderas.add(jLabel107, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 30, 30));
+        LabContadorBanderas.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 30, 30));
+        LabContadorBanderas.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 30, 30));
+        LabContadorBanderas.add(jLabel110, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 30, 30));
+        LabContadorBanderas.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 30, 30));
+        LabContadorBanderas.add(jLabel112, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 30, 30));
+        LabContadorBanderas.add(jLabel113, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 30, 30));
+        LabContadorBanderas.add(jLabel114, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 30, 30));
+        LabContadorBanderas.add(jLabel115, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 30, 30));
+        LabContadorBanderas.add(jLabel116, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 30, 30));
+        LabContadorBanderas.add(jLabel117, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 30, 30));
+        LabContadorBanderas.add(jLabel118, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 30, 30));
+        LabContadorBanderas.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 30, 30));
+        LabContadorBanderas.add(jLabel120, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 30, 30));
+        LabContadorBanderas.add(jLabel121, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 30, 30));
+        LabContadorBanderas.add(jLabel122, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 30, 30));
+        LabContadorBanderas.add(jLabel123, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 30, 30));
+        LabContadorBanderas.add(jLabel124, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 30, 30));
+        LabContadorBanderas.add(jLabel125, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 30, 30));
+        LabContadorBanderas.add(jLabel126, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 30, 30));
+        LabContadorBanderas.add(jLabel127, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 30, 30));
+        LabContadorBanderas.add(jLabel128, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 30, 30));
+        LabContadorBanderas.add(jLabel129, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 30, 30));
+        LabContadorBanderas.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 30, 30));
+        LabContadorBanderas.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 30, 30));
+        LabContadorBanderas.add(jLabel132, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 30, 30));
+        LabContadorBanderas.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 30, 30));
+        LabContadorBanderas.add(jLabel134, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 30, 30));
+        LabContadorBanderas.add(jLabel135, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 30, 30));
+        LabContadorBanderas.add(jLabel136, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 30, 30));
+        LabContadorBanderas.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 30, 30));
+        LabContadorBanderas.add(jLabel138, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 30, 30));
+        LabContadorBanderas.add(jLabel139, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 30, 30));
+        LabContadorBanderas.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 30, 30));
+        LabContadorBanderas.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 30, 30));
+        LabContadorBanderas.add(jLabel142, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 30, 30));
+        LabContadorBanderas.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 30, 30));
+        LabContadorBanderas.add(jLabel144, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 30, 30));
 
         tablero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/tablero.png"))); // NOI18N
-        jPanel1.add(tablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 360, 360));
+        LabContadorBanderas.add(tablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 360, 360));
 
-        LabRejoj.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabRejoj.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         LabRejoj.setForeground(new java.awt.Color(0, 0, 0));
         LabRejoj.setText("00:00:00");
-        jPanel1.add(LabRejoj, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 80, 30));
+        LabContadorBanderas.add(LabRejoj, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 140, 40));
 
         btnReiniciar.setText("Reiniciar");
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -367,17 +371,25 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
                 btnReiniciarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
+        LabContadorBanderas.add(btnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, -1));
+
+        jLabel145.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel145.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel145.setText("30");
+        LabContadorBanderas.add(jLabel145, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 40, 40));
+
+        labIcon.setForeground(new java.awt.Color(0, 0, 0));
+        LabContadorBanderas.add(labIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 30, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+            .addComponent(LabContadorBanderas, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LabContadorBanderas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -428,6 +440,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         if (reloj == null) {
             iniciarReloj();
         }
+        
         if (e.getSource() instanceof JLabel label) {
             int[] posicion = obtenerPosicion(label);
             if (posicion[0] == -1 || posicion[1] == -1) {
@@ -543,6 +556,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel LabContadorBanderas;
     private javax.swing.JLabel LabRejoj;
     private javax.swing.JButton btnReiniciar;
     private javax.swing.JLabel jLabel1;
@@ -596,6 +610,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     private javax.swing.JLabel jLabel142;
     private javax.swing.JLabel jLabel143;
     private javax.swing.JLabel jLabel144;
+    private javax.swing.JLabel jLabel145;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -689,7 +704,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labIcon;
     private javax.swing.JLabel tablero;
     // End of variables declaration//GEN-END:variables
 }
