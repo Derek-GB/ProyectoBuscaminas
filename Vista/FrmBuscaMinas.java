@@ -19,6 +19,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     JLabel[][] casillas;
     BuscaMinasController controlador;
     Reloj reloj;
+    boolean relojIniciado;
 
     /**
      * Creates new form FrmBuscaMinas
@@ -28,8 +29,9 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         casillas = new JLabel[12][12];
         inicializarCasillas();
         añadirEscuchador();
-        reloj = Reloj.getinstance();
+        reloj = new Reloj(LabRejoj);
         (new AnimacionCasilla(labIcon,Estado.MARCADA,false,0)).start();
+        relojIniciado = false;
     }
 
     private void añadirEscuchador() {
@@ -437,8 +439,9 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 //    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (reloj == null) {
+        if (!relojIniciado) {
             iniciarReloj();
+            relojIniciado = !relojIniciado;
         }
         
         if (e.getSource() instanceof JLabel label) {
@@ -470,7 +473,6 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     }
 
     public void iniciarReloj() {
-        reloj.setLabel(LabRejoj);
         reloj.start();
     }
 

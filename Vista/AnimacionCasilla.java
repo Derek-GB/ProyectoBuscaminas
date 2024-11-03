@@ -36,6 +36,8 @@ public class AnimacionCasilla extends Thread {
         playAnimacion(direcciones);
         if (esMina && estado != Estado.MARCADA) {
             playAnimacionExplosion();
+        } else if (estado== Estado.CERRADA){
+            label.setIcon(null);
         }
     }
 

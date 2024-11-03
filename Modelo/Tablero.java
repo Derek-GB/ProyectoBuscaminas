@@ -68,7 +68,7 @@ public class Tablero implements Observable {
     // Verifica que la posición está dentro de los límites
     if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
         // Verifica si la casilla ya está destapada para evitar llamadas recursivas infinitas
-        if (casillas[fila][columna].getEstado() != Estado.DESTAPADA) {
+        if (casillas[fila][columna].getEstado() == Estado.CERRADA) {
             casillas[fila][columna].destapar();
             emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
             int minasCircundantes = contarMinasCircundantes(fila, columna);

@@ -4,7 +4,6 @@
  */
 package Vista;
 
-import java.time.LocalTime;
 import javax.swing.JLabel;
 
 /**
@@ -14,65 +13,71 @@ import javax.swing.JLabel;
 public class Reloj extends Thread {
 
     private JLabel label;
-    private static Reloj reloj;
-    private LocalTime tiempoActual;
-    private boolean corriendo;
-    
-    @Override
-    public void run() {
-        for (int h = 0; h <= 12; h++) {
-            for (int m = 0; m < 60; m++) {
-                for (int s = 0; s < 60; s++) {
-                    String strH = h < 10 ? "0" + h : h + "";
-                    String strM = m < 10 ? "0" + m : m + "";
-                    String strS = s < 10 ? "0" + s : s + "";
-                    label.setText(strH + ":" + strM + ":" + strS);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) {
+    private int horas, minutos, segundos;
+    private boolean corriendo, pausa;
 
-                    }
-                }
-            }
-        }
-    }
-
-    public void setLabel(JLabel label) {
+    public Reloj(JLabel label) {
         this.label = label;
-
+        this.horas = 0;
+        this.minutos = 0;
+        this.segundos = 0;
+        this.corriendo = true;
+        this.pausa = false;
     }
 
-//    public void iniciar() {
-//        if (!corriendo) {
-//            this.tiempoActual = LocalTime.now();
-//            corriendo = true;
-//        }
-//    }
+    public void pausar() {
+        pausa = true;
+    }
 
-    public void detener() {
-        if (corriendo) {
-            corriendo = false;
+    public void reanudar() {
+        pausa = false;
+        synchronized (this) {
+            this.notify();
         }
     }
 
     public void reiniciar() {
-        this.tiempoActual = LocalTime.now();
-        corriendo = true;
+        pausa = false;
+        horas = 0;
+        minutos = 0;
+        segundos = 0;
+        actualizarLabel();
     }
 
-    private Reloj() {
-        this.tiempoActual = LocalTime.now();
-        this.corriendo = false;
+//    public boolean isRunning() {
+//        return running;
+//    }
+    private void actualizarLabel() {
+        label.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos));
+//        SwingUtilities.invokeLater(() -> label.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos)));
     }
 
-    public static Reloj getinstance() {
-        if (reloj == null) {
-            reloj = new Reloj();
+    @Override
+    public void run() {
+        try {
+            while (corriendo) {
+                synchronized (this) {
+                    if (pausa) {
+                        this.wait();
+                    }
+                }
+
+                segundos++;
+                if (segundos == 60) {
+                    segundos = 0;
+                    minutos++;
+                }
+                if (minutos == 60) {
+                    minutos = 0;
+                    horas++;
+                }
+
+                actualizarLabel();
+
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
-        return reloj;
-    }
-
-    public LocalTime getTiempoActual() {
-        return tiempoActual;
     }
 }
