@@ -23,7 +23,8 @@ public class Tablero implements Observable {
     public Tablero() {
         this.totalMinas = 30;
         this.casillas = new Casilla[filas][columnas];
-        inicializarTablero();
+        this.observadores = new ArrayList<>();
+//        inicializarTablero();
     }
 
     public void inicializarTablero() {
@@ -64,11 +65,16 @@ public class Tablero implements Observable {
     }
 
     public void destaparCasilla(int fila, int columna) {
-        if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
+    // Verifica que la posición está dentro de los límites
+    if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
+        // Verifica si la casilla ya está destapada para evitar llamadas recursivas infinitas
+        if (casillas[fila][columna].getEstado() != Estado.DESTAPADA) {
             casillas[fila][columna].destapar();
-            emitirSeñal(casillas[fila][columna],new int[]{fila,columna});
+            emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
             int minasCircundantes = contarMinasCircundantes(fila, columna);
             casillas[fila][columna].establecerNumero(minasCircundantes);
+            
+            // Solo si no hay minas circundantes, se sigue expandiendo la zona vacía
             if (minasCircundantes == 0) {
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) {
@@ -80,6 +86,7 @@ public class Tablero implements Observable {
             }
         }
     }
+}
 
     public int contarMinasCircundantes(int fila, int columna) {
         int contador = 0;

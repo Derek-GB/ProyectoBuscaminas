@@ -7,7 +7,6 @@ package Controlador;
 //import Interfaces.Observable;
 import Interfaces.Observador;
 import Modelo.Casilla;
-import Modelo.Estado;
 import Modelo.Tablero;
 import Vista.AnimacionCasilla;
 import Vista.FrmBuscaMinas;
@@ -32,13 +31,13 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
     public void iniciarJuego() {
         tablero.inicializarTablero();
-        vista.actualizarVista(tablero);
+//        vista.actualizarVista(tablero);
     }
 
     @Override
     public boolean RecibirSeñal(Object señal, int[] posicion) {
         if (señal instanceof Casilla casilla) {
-            (new AnimacionCasilla(vista.getCasilla(posicion), casilla.getEstado(), casilla.isEsMina(), casilla.getNumero())).start();
+            (new AnimacionCasilla(vista.getCasilla(posicion), casilla.getEstado(), casilla.isEsMina(), tablero.contarMinasCircundantes(posicion[0], posicion[1]))).start();
             return true;
         }
         return false;
@@ -91,12 +90,12 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 //    }
     public void manejarMarcadoCasilla(int fila, int columna) {
         tablero.marcarCasilla(fila, columna);
-        vista.actualizarVista(tablero);
+//        vista.actualizarVista(tablero);
     }
 
     public void manejarDestapadoCasilla(int fila, int columna) {
         tablero.destaparCasilla(fila, columna);
-        vista.actualizarVista(tablero);
+//        vista.actualizarVista(tablero);
     }
 
     public void verificarFinDeJuego() {
@@ -109,7 +108,7 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
     public void reiniciarJuego() {
         tablero.inicializarTablero();
-        vista.actualizarVista(tablero);
+//        vista.actualizarVista(tablero);
     }
 
 }

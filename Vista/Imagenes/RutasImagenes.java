@@ -13,7 +13,7 @@ public class RutasImagenes {
     private static final int FRAMES = 4;
     private static final String FORMATO = ".png";
     private static final String BOMBA = "/Vista/Imagenes/Bomba/bomba";
-    private static final String EXPLOSION = "/Vista/Imagenes/Bomba/bomba";
+    private static final String EXPLOSION = "/Vista/Imagenes/Explosion/explosion";
     private static final String BANDERA = "/Vista/Imagenes/Bandera/bandera";
     private static final String UNO = "/Vista/Imagenes/Uno/uno";
     private static final String DOS = "/Vista/Imagenes/Dos/dos";
@@ -23,6 +23,7 @@ public class RutasImagenes {
     private static final String SEIS = "/Vista/Imagenes/Seis/seis";
     private static final String SIETE = "/Vista/Imagenes/Siete/siete";
     private static final String OCHO = "/Vista/Imagenes/Ocho/ocho";
+    private static final String DESTAPADO = "/Vista/Imagenes/Destapado/destapado";
 
     public static String[] getRutaBomba() {
         return getRuta(BOMBA);
@@ -69,7 +70,7 @@ public class RutasImagenes {
     }
     
     public static String[] getRutaDestapado(){
-        throw new UnsupportedOperationException("Recuerdame");
+        return getRuta(DESTAPADO);
     }
 
     private static String[] getRuta(String var) {

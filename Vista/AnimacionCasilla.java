@@ -34,7 +34,7 @@ public class AnimacionCasilla extends Thread {
     public void run() {
         String[] direcciones = escogerRuta();
         playAnimacion(direcciones);
-        if (esMina) {
+        if (esMina && estado != Estado.MARCADA) {
             playAnimacionExplosion();
         }
     }
