@@ -13,13 +13,23 @@ import javax.swing.ImageIcon;
  *
  * @author Fernando
  */
-public class FrmFinal extends javax.swing.JDialog {
+public class FrmFinal extends javax.swing.JDialog implements Runnable {
 
     private boolean victoria;
     BuscaMinasController controlador;
     FrmBuscaMinas busca;
     Reloj reloj;
 
+    @Override
+    public void run() {
+        try{
+            Thread.sleep(2000);
+        }catch(InterruptedException e){
+            
+        }
+        this.setVisible(true);
+    }
+    
     /**
      * Creates new form FrmPantallaFinal
      *

@@ -67,19 +67,12 @@ public class Tablero implements Observable {
     public void destaparCasilla(int fila, int columna) {
         if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
             if (casillas[fila][columna].getEstado() != Estado.DESTAPADA) {
+                casillas[fila][columna].destapar();
+                emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
                 if (casillas[fila][columna].isEsMina()) {
-                    emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     finalizarPartida();
                     return;
                 }
-
-                casillas[fila][columna].destapar();
-                emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
                 int minasCircundantes = contarMinasCircundantes(fila, columna);
                 casillas[fila][columna].establecerNumero(minasCircundantes);
 
@@ -153,11 +146,6 @@ public class Tablero implements Observable {
                     emitirSeñal(casillas[i][j], new int[]{i, j});
                 }
             }
-        }
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         emitirSeñal(true, null);
     }

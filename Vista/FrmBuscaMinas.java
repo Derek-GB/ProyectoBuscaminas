@@ -571,7 +571,8 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
             reloj.pausar();
         }
 
-        frmFinal.setVisible(true);
+        Thread hilo = new Thread(frmFinal);
+        hilo.start();
     }
 
     // Método que verifica el estado del juego 

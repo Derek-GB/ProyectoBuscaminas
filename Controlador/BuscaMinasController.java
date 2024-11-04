@@ -45,10 +45,14 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
             }
 
             return true;
-        } else if (señal instanceof Boolean explosion && explosion) {
+        } else if (señal instanceof Boolean explosion) {
+            if (explosion){
             // Si la señal es un Boolean y es true, significa que una mina explotó
             verificarFinDeJuego(false);  // false indica que el jugador ha perdido
             return true;
+            } else {
+                verificarFinDeJuego(true);
+            }
         }
         return false;
     }
