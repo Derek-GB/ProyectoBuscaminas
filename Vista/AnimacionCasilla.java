@@ -7,7 +7,15 @@ package Vista;
 import Modelo.Estado;
 import Vista.Imagenes.RutasImagenes;
 import java.awt.Image;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,7 +25,8 @@ import javax.swing.JLabel;
  * @author d2tod
  */
 public class AnimacionCasilla extends Thread {
-    private static HashMap<String,Icon> sprites = new HashMap<>();
+
+    private static HashMap<String, Icon> sprites = new HashMap<>();
     private JLabel label;
     private Estado estado;
     private boolean esMina;
@@ -36,7 +45,7 @@ public class AnimacionCasilla extends Thread {
         playAnimacion(direcciones);
         if (esMina && estado == Estado.DESTAPADA) {
             playAnimacionExplosion();
-        } else if (estado== Estado.CERRADA){
+        } else if (estado == Estado.CERRADA) {
             label.setIcon(null);
         }
     }
@@ -95,6 +104,7 @@ public class AnimacionCasilla extends Thread {
     }
 
     private void playAnimacionExplosion() {
+        reproducirExploción();
         playAnimacion(RutasImagenes.getRutaExplosion());
     }
 
@@ -110,11 +120,36 @@ public class AnimacionCasilla extends Thread {
 
     private void ajustarImagen(String ubicacion, javax.swing.JLabel label) {
         Icon icon = sprites.get(ubicacion);
-        if(icon == null){
-        ImageIcon image = new ImageIcon(getClass().getResource(ubicacion));
-        icon = new ImageIcon(image.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-        sprites.put(ubicacion, icon);
+        if (icon == null) {
+            ImageIcon image = new ImageIcon(getClass().getResource(ubicacion));
+            icon = new ImageIcon(image.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+            sprites.put(ubicacion, icon);
         }
-        label.setIcon(icon); 
+        label.setIcon(icon);
+    }
+
+    private void reproducirExploción() {
+        new Thread(() -> {
+            Clip clip = null;
+
+            try {
+                InputStream audioStream = getClass().getResourceAsStream("/Sonido/Mina (mp3cut.net).wav");
+                if (audioStream == null) {
+                    throw new FileNotFoundException("No se pudo encontrar el archivo de sonido.");
+                }
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioStream);
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+                Thread.sleep(10000);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
+                System.out.println("Error al reproducir el archivo de sonido: " + e.getMessage());
+            } finally {
+                if (clip != null && clip.isRunning()) {
+                    clip.stop();
+                    clip.close();
+                }
+            }
+        }).start();
     }
 }

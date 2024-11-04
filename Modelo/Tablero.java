@@ -87,7 +87,7 @@ public class Tablero implements Observable {
                 }
 
                 if (verificarVictoria()) {
-                    emitirSeñal("Victoria", null);
+                    emitirSeñal(true, null);
                 }
             }
         }

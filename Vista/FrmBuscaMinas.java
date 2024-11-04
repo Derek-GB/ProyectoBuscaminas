@@ -8,6 +8,11 @@ import Controlador.BuscaMinasController;
 import Modelo.Estado;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JLabel;
 
 /**
@@ -22,11 +27,15 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     Reloj reloj;
     boolean relojIniciado;
 
+    private volatile boolean running = true;
+    private Clip clip;
+
     /**
      * Creates new form FrmBuscaMinas
      */
     public FrmBuscaMinas() {
         initComponents();
+        this.setLocationRelativeTo(null);
         casillas = new JLabel[12][12];
         inicializarCasillas();
         añadirEscuchador();
@@ -36,7 +45,8 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         (new AnimacionCasilla(labIcon, Estado.MARCADA, false, 0)).start();
         relojIniciado = false;
         contadorBanderas = 30;
-        
+        reproducirSonido();
+
     }
 
     private void añadirEscuchador() {
@@ -63,6 +73,10 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     public void restarContadorBandera() {
         contadorBanderas--;
         jLabel145.setText(String.valueOf(contadorBanderas));
+    }
+
+    public void setjLabel145(String nombre) {
+        this.jLabel145.setText(nombre);
     }
 
     /**
@@ -417,6 +431,8 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         controlador.reiniciarJuego();
         reiniciarCasillas();
         reloj.reiniciar();
+        contadorBanderas = 30;
+        jLabel145.setText("30");
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
 //    /**
@@ -561,9 +577,9 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 //        }
 //    }
     public void mostrarFinDeJuego(String resultado) {
-        FrmFinal frmFinal = new FrmFinal(this, true,controlador,this,reloj);
+        FrmFinal frmFinal = new FrmFinal(this, true, controlador, this, reloj);
 
-        if (resultado.equals("Ganaste")) { // Cambié a "Ganaste" para que coincida
+        if (resultado.equals("Ganaste")) {
             frmFinal.setVictoria(true);
             reloj.pausar();
         } else if (resultado.equals("Perdiste")) {
@@ -575,7 +591,42 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         hilo.start();
     }
 
-    // Método que verifica el estado del juego 
+    public void reproducirSonido() {
+        new Thread(() -> {
+            try {
+                InputStream audioStream = getClass().getResourceAsStream("/Sonido/busca1.wav");
+                if (audioStream == null) {
+                    throw new FileNotFoundException("No se pudo encontrar el archivo de sonido.");
+                }
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioStream);
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+
+                while (running) {
+                    clip.start();
+                    while (clip.isRunning() && running) {
+                        Thread.sleep(100);
+                    }
+                    clip.setFramePosition(0);
+                }
+            } catch (Exception e) {
+                System.out.println("Error al reproducir el archivo de sonido: " + e.getMessage());
+            } finally {
+                if (clip != null) {
+                    clip.close();
+                }
+            }
+        }).start();
+    }
+
+    public void detenerSonido() {
+        running = false;
+        if (clip != null && clip.isOpen()) {
+            clip.stop();
+            clip.close();
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LabContadorBanderas;

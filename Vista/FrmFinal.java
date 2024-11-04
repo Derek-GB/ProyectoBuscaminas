@@ -6,6 +6,14 @@ package Vista;
 
 import Controlador.BuscaMinasController;
 import java.awt.Image;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -22,14 +30,14 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
 
     @Override
     public void run() {
-        try{
+        try {
             Thread.sleep(2000);
-        }catch(InterruptedException e){
-            
+        } catch (InterruptedException e) {
+
         }
         this.setVisible(true);
     }
-    
+
     /**
      * Creates new form FrmPantallaFinal
      *
@@ -38,11 +46,12 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
      */
     public FrmFinal(java.awt.Frame parent, boolean modal, BuscaMinasController controlador, FrmBuscaMinas busca, Reloj reloj) {
         super(parent, modal);
-        this.controlador=controlador;
-        this.busca=busca;
-        this.reloj=reloj;
+        this.setLocationRelativeTo(null);
+        this.controlador = controlador;
+        this.busca = busca;
+        this.reloj = reloj;
         initComponents();
-        this.setLocation(325, 100);
+        this.setLocation(busca.getX() + (busca.getWidth() - getWidth()) / 2,busca.getY() + (busca.getHeight() - getHeight()) / 2);
     }
 
     public void setVictoria(boolean victoria) {
@@ -52,6 +61,7 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
 
     private void ajustarEstadoPartida() {
         if (victoria) {
+            reproducirVictoria();
             ajustarImagenes("/Vista/Imagenes/ganar.png", txtFinal);
         } else {
             ajustarImagenes("/Vista/Imagenes/perder.png", txtFinal);
@@ -72,15 +82,17 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
         jButton1 = new javax.swing.JButton();
         txtFinal = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 255, 51));
         jButton1.setText("Reiniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,28 +100,40 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 98, 36));
-        jPanel1.add(txtFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 350, 180));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 98, 36));
+        jPanel1.add(txtFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 350, 180));
 
         jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setForeground(new java.awt.Color(255, 0, 0));
-        jButton2.setText("Salir");
+        jButton2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(102, 153, 255));
+        jButton2.setText("Volver al campo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 98, 36));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 130, 36));
+
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 0, 0));
+        jButton3.setText("Salir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 98, 36));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
         );
 
         pack();
@@ -119,22 +143,31 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
         controlador.reiniciarJuego();
         busca.reiniciarCasillas();
         reloj.reiniciar();
-        busca.relojIniciado=false;
+        busca.relojIniciado = false;
+        busca.contadorBanderas = 30;
+        busca.setjLabel145("30");
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+        busca.dispose();
+        busca.detenerSonido();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txtFinal;
@@ -157,4 +190,28 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
     /**
      * Metodo que permite mostrar el estado de la victoria
      */
+    private void reproducirVictoria() {
+        new Thread(() -> {
+            Clip clip = null;
+
+            try {
+                InputStream audioStream = getClass().getResourceAsStream("/Sonido/Victoria (mp3cut.net).wav");
+                if (audioStream == null) {
+                    throw new FileNotFoundException("No se pudo encontrar el archivo de sonido.");
+                }
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioStream);
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+                Thread.sleep(10000);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
+                System.out.println("Error al reproducir el archivo de sonido: " + e.getMessage());
+            } finally {
+                if (clip != null && clip.isRunning()) {
+                    clip.stop();
+                    clip.close();
+                }
+            }
+        }).start();
+    }
 }
