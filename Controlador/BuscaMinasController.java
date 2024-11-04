@@ -7,6 +7,7 @@ package Controlador;
 //import Interfaces.Observable;
 import Interfaces.Observador;
 import Modelo.Casilla;
+import Modelo.Estado;
 import Modelo.Tablero;
 import Vista.AnimacionCasilla;
 import Vista.FrmBuscaMinas;
@@ -38,6 +39,11 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
     public boolean RecibirSeñal(Object señal, int[] posicion) {
         if (señal instanceof Casilla casilla) {
             (new AnimacionCasilla(vista.getCasilla(posicion), casilla.getEstado(), casilla.isEsMina(), tablero.contarMinasCircundantes(posicion[0], posicion[1]))).start();
+            if(casilla.getEstado() == Estado.CERRADA){
+                vista.sumarContadorBandera();
+            } else if (casilla.getEstado() == Estado.MARCADA){
+                vista.restarContadorBandera();
+            }
             return true;
         }
         return false;

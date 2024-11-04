@@ -16,6 +16,7 @@ import javax.swing.JLabel;
  */
 public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 
+    int contadorBanderas;
     JLabel[][] casillas;
     BuscaMinasController controlador;
     Reloj reloj;
@@ -32,6 +33,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         reloj = new Reloj(LabRejoj);
         (new AnimacionCasilla(labIcon,Estado.MARCADA,false,0)).start();
         relojIniciado = false;
+        contadorBanderas = 30;
     }
 
     private void añadirEscuchador() {
@@ -48,6 +50,16 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
                 casillas[i][j].setIcon(null);
             }
         }
+    }
+    
+    public void sumarContadorBandera(){
+        contadorBanderas++;
+        jLabel145.setText(String.valueOf(contadorBanderas));
+    }
+    
+    public void restarContadorBandera(){
+        contadorBanderas--;
+        jLabel145.setText(String.valueOf(contadorBanderas));
     }
 
     /**
@@ -377,8 +389,9 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 
         jLabel145.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel145.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel145.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel145.setText("30");
-        LabContadorBanderas.add(jLabel145, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 40, 40));
+        LabContadorBanderas.add(jLabel145, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 70, 40));
 
         labIcon.setForeground(new java.awt.Color(0, 0, 0));
         LabContadorBanderas.add(labIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 30, 30));
