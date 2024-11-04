@@ -65,28 +65,40 @@ public class Tablero implements Observable {
     }
 
     public void destaparCasilla(int fila, int columna) {
-    // Verifica que la posición está dentro de los límites
-    if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
-        // Verifica si la casilla ya está destapada para evitar llamadas recursivas infinitas
-        if (casillas[fila][columna].getEstado() == Estado.CERRADA) {
-            casillas[fila][columna].destapar();
-            emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
-            int minasCircundantes = contarMinasCircundantes(fila, columna);
-            casillas[fila][columna].establecerNumero(minasCircundantes);
-            
-            // Solo si no hay minas circundantes, se sigue expandiendo la zona vacía
-            if (minasCircundantes == 0) {
-                for (int i = -1; i <= 1; i++) {
-                    for (int j = -1; j <= 1; j++) {
-                        if (i != 0 || j != 0) {
-                            destaparCasilla(fila + i, columna + j);
+        if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
+            if (casillas[fila][columna].getEstado() != Estado.DESTAPADA) {
+                if (casillas[fila][columna].isEsMina()) {
+                    emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    finalizarPartida();
+                    return;
+                }
+
+                casillas[fila][columna].destapar();
+                emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
+                int minasCircundantes = contarMinasCircundantes(fila, columna);
+                casillas[fila][columna].establecerNumero(minasCircundantes);
+
+                if (minasCircundantes == 0) {
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            if (i != 0 || j != 0) {
+                                destaparCasilla(fila + i, columna + j);
+                            }
                         }
                     }
+                }
+
+                if (verificarVictoria()) {
+                    emitirSeñal("Victoria", null);
                 }
             }
         }
     }
-}
 
     public int contarMinasCircundantes(int fila, int columna) {
         int contador = 0;
@@ -107,7 +119,7 @@ public class Tablero implements Observable {
     public void marcarCasilla(int fila, int columna) {
         if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
             casillas[fila][columna].marcar();
-            emitirSeñal(casillas[fila][columna],new int[]{fila,columna});
+            emitirSeñal(casillas[fila][columna], new int[]{fila, columna});
         }
     }
 
@@ -133,4 +145,32 @@ public class Tablero implements Observable {
         return false;
     }
 
+    public void finalizarPartida() {
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if (casillas[i][j].isEsMina()) {
+                    casillas[i][j].destapar();
+                    emitirSeñal(casillas[i][j], new int[]{i, j});
+                }
+            }
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        emitirSeñal(true, null);
+    }
+
+    public boolean verificarVictoria() {
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if (!casillas[i][j].isEsMina() && casillas[i][j].getEstado() != Estado.DESTAPADA) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
 }

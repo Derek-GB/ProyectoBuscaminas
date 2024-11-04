@@ -14,22 +14,27 @@ import javax.swing.ImageIcon;
  * @author Fernando
  */
 public class FrmFinal extends javax.swing.JDialog {
-    
+
     private boolean victoria;
-    BuscaMinasController controller;
+    BuscaMinasController controlador;
+    FrmBuscaMinas busca;
+    Reloj reloj;
 
     /**
      * Creates new form FrmPantallaFinal
+     *
      * @param parent
      * @param modal
      */
-    public FrmFinal(java.awt.Frame parent, boolean modal) {
+    public FrmFinal(java.awt.Frame parent, boolean modal, BuscaMinasController controlador, FrmBuscaMinas busca, Reloj reloj) {
         super(parent, modal);
+        this.controlador=controlador;
+        this.busca=busca;
+        this.reloj=reloj;
         initComponents();
-        this.setLocation(325,100); 
+        this.setLocation(325, 100);
     }
 
-   
     public void setVictoria(boolean victoria) {
         this.victoria = victoria;
         ajustarEstadoPartida();
@@ -101,7 +106,11 @@ public class FrmFinal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.reiniciarJuego();
+        controlador.reiniciarJuego();
+        busca.reiniciarCasillas();
+        reloj.reiniciar();
+        busca.relojIniciado=false;
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -111,49 +120,7 @@ public class FrmFinal extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmFinal dialog = new FrmFinal(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-            
-        }); 
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -164,22 +131,20 @@ public class FrmFinal extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     /**
      * Metodo que permite ajustar imagenes
+     *
      * @param ubicacion
-     * @param cosa 
+     * @param cosa
      */
-    public void ajustarImagenes(String ubicacion,javax.swing.JLabel cosa){
-    ImageIcon image = new ImageIcon(getClass().getResource(ubicacion));
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(cosa.getWidth(), cosa.getHeight(),Image.SCALE_DEFAULT));
+    public void ajustarImagenes(String ubicacion, javax.swing.JLabel cosa) {
+        ImageIcon image = new ImageIcon(getClass().getResource(ubicacion));
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(cosa.getWidth(), cosa.getHeight(), Image.SCALE_DEFAULT));
         cosa.setIcon(icon);
-}
+    }
     /**
      * Metodo que ajusta todas las imagenes
      */
 
-    
-    
     /**
      * Metodo que permite mostrar el estado de la victoria
      */
-
 }

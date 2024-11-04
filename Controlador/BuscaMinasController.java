@@ -20,7 +20,6 @@ import Vista.FrmBuscaMinas;
  */
 public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
-
     private Tablero tablero;
     private FrmBuscaMinas vista;
 
@@ -39,11 +38,16 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
     public boolean RecibirSeñal(Object señal, int[] posicion) {
         if (señal instanceof Casilla casilla) {
             (new AnimacionCasilla(vista.getCasilla(posicion), casilla.getEstado(), casilla.isEsMina(), tablero.contarMinasCircundantes(posicion[0], posicion[1]))).start();
-            if(casilla.getEstado() == Estado.CERRADA){
+            if (casilla.getEstado() == Estado.CERRADA) {
                 vista.sumarContadorBandera();
-            } else if (casilla.getEstado() == Estado.MARCADA){
+            } else if (casilla.getEstado() == Estado.MARCADA) {
                 vista.restarContadorBandera();
             }
+
+            return true;
+        } else if (señal instanceof Boolean explosion && explosion) {
+            // Si la señal es un Boolean y es true, significa que una mina explotó
+            verificarFinDeJuego(false);  // false indica que el jugador ha perdido
             return true;
         }
         return false;
@@ -101,14 +105,17 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
     public void manejarDestapadoCasilla(int fila, int columna) {
         tablero.destaparCasilla(fila, columna);
+        if (!tablero.hayMinasDestapadas() && !tablero.hayCasillasSinDestapar()) {
+            verificarFinDeJuego(true);  
+        }
 //        vista.actualizarVista(tablero);
     }
 
-    public void verificarFinDeJuego() {
-        if (tablero.hayMinasDestapadas()) {
+    public void verificarFinDeJuego(boolean victoria) {
+        if (victoria) {
+            vista.mostrarFinDeJuego("Ganaste"); 
+        } else {
             vista.mostrarFinDeJuego("Perdiste");
-        } else if (tablero.hayCasillasSinDestapar()) {
-            vista.mostrarFinDeJuego("Ganaste");
         }
     }
 

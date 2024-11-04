@@ -31,9 +31,12 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         inicializarCasillas();
         añadirEscuchador();
         reloj = new Reloj(LabRejoj);
-        (new AnimacionCasilla(labIcon,Estado.MARCADA,false,0)).start();
+        reloj.start();
+        reloj.pausar();
+        (new AnimacionCasilla(labIcon, Estado.MARCADA, false, 0)).start();
         relojIniciado = false;
         contadorBanderas = 30;
+        
     }
 
     private void añadirEscuchador() {
@@ -43,21 +46,21 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
             }
         }
     }
-    
-    private void reiniciarCasillas() {
+
+    protected void reiniciarCasillas() {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
                 casillas[i][j].setIcon(null);
             }
         }
     }
-    
-    public void sumarContadorBandera(){
+
+    public void sumarContadorBandera() {
         contadorBanderas++;
         jLabel145.setText(String.valueOf(contadorBanderas));
     }
-    
-    public void restarContadorBandera(){
+
+    public void restarContadorBandera() {
         contadorBanderas--;
         jLabel145.setText(String.valueOf(contadorBanderas));
     }
@@ -454,9 +457,9 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if (!relojIniciado) {
             iniciarReloj();
-            relojIniciado = !relojIniciado;
+            relojIniciado = true;
         }
-        
+
         if (e.getSource() instanceof JLabel label) {
             int[] posicion = obtenerPosicion(label);
             if (posicion[0] == -1 || posicion[1] == -1) {
@@ -486,7 +489,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
     }
 
     public void iniciarReloj() {
-        reloj.start();
+        reloj.reanudar();
     }
 
     @Override
@@ -543,7 +546,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
             }
         }
     }
-    
+
 //    private void acomodarCasillas() {
 //        int labelCount = 1;
 //        for (int i = 0; i < 12; i++) {
@@ -557,18 +560,21 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 //            }
 //        }
 //    }
-
     public void mostrarFinDeJuego(String resultado) {
-        boolean victoria = resultado.equals("¡Ganaste!");
-        FrmFinal frmFinal = new FrmFinal(this, true);
-        frmFinal.setVictoria(victoria);
+        FrmFinal frmFinal = new FrmFinal(this, true,controlador,this,reloj);
+
+        if (resultado.equals("Ganaste")) { // Cambié a "Ganaste" para que coincida
+            frmFinal.setVictoria(true);
+            reloj.pausar();
+        } else if (resultado.equals("Perdiste")) {
+            frmFinal.setVictoria(false);
+            reloj.pausar();
+        }
+
         frmFinal.setVisible(true);
     }
 
     // Método que verifica el estado del juego 
-    public void verificarFinDeJuego() {
-        controlador.verificarFinDeJuego();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LabContadorBanderas;
