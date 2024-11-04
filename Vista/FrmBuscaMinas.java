@@ -431,6 +431,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         controlador.reiniciarJuego();
         reiniciarCasillas();
         reloj.reiniciar();
+        relojIniciado = false;
         contadorBanderas = 30;
         jLabel145.setText("30");
     }//GEN-LAST:event_btnReiniciarActionPerformed

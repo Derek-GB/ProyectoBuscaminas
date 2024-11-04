@@ -37,7 +37,7 @@ public class Reloj extends Thread {
     }
 
     public void reiniciar() {
-        pausa = false;
+        pausa = true;
         horas = 0;
         minutos = 0;
         segundos = 0;
