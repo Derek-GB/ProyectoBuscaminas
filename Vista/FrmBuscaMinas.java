@@ -564,19 +564,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         }
     }
 
-//    private void acomodarCasillas() {
-//        int labelCount = 1;
-//        for (int i = 0; i < 12; i++) {
-//            for (int j = 0; j < 12; j++) {
-//                try {
-//                    casillas[i][j].getLayout().
-//                } catch (NoSuchFieldException | IllegalAccessException e) {
-//                    e.printStackTrace();
-//                }
-//                labelCount++;
-//            }
-//        }
-//    }
+
     public void mostrarFinDeJuego(String resultado) {
         FrmFinal frmFinal = new FrmFinal(this, true, controlador, this, reloj);
 

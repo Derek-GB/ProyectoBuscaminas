@@ -4,15 +4,14 @@
  */
 package Controlador;
 
-//import Interfaces.Observable;
+
 import Interfaces.Observador;
 import Modelo.Casilla;
 import Modelo.Estado;
 import Modelo.Tablero;
 import Vista.AnimacionCasilla;
 import Vista.FrmBuscaMinas;
-//import java.awt.event.MouseEvent;
-//import java.awt.event.MouseListener;
+
 
 /**
  *
@@ -46,9 +45,8 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
             return true;
         } else if (señal instanceof Boolean explosion) {
-            if (explosion){
-            // Si la señal es un Boolean y es true, significa que una mina explotó
-            verificarFinDeJuego(false);  // false indica que el jugador ha perdido
+            if (explosion){  
+            verificarFinDeJuego(false);  
             return true;
             } else {
                 verificarFinDeJuego(true);
@@ -57,51 +55,6 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
         return false;
     }
 
-//    @Override
-//    public void emitirSeñal(Object señal) {
-//        for (Observador observador : observadores) {
-//            observador.RecibirSeñal(señal);
-//        }
-//    }
-//    @Override
-//    public boolean añadirObservador(Observador observador) {
-//        if (!observadores.contains(observador)) {
-//            observadores.add(observador);
-//            return true;
-//        }
-//        return false;
-//    }
-//    @Override
-//    public void mouseClicked(MouseEvent e) {
-//        /*Estos eventos de mouse es por el MouseListener, pero solo se necesita
-//        el mouse Clicked, este revisa cual de los dos clics se hizo y en base a eso actua*/
-//        switch (e.getButton()) {
-//            case (MouseEvent.BUTTON1) -> {
-//                //En caso de clic izquierdo...
-//
-//            }
-//            case (MouseEvent.BUTTON3) -> {
-//                //En caso de clic derecho...
-//
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void mousePressed(MouseEvent e) {
-//    }
-//
-//    @Override
-//    public void mouseReleased(MouseEvent e) {
-//    }
-//
-//    @Override
-//    public void mouseEntered(MouseEvent e) {
-//    }
-//
-//    @Override
-//    public void mouseExited(MouseEvent e) {
-//    }
     public void manejarMarcadoCasilla(int fila, int columna) {
         tablero.marcarCasilla(fila, columna);
 //        vista.actualizarVista(tablero);
