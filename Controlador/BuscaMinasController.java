@@ -5,7 +5,7 @@
 package Controlador;
 
 
-import Interfaces.Observador;
+import Modelo.Interfaces.Observador;
 import Modelo.Casilla;
 import Modelo.Estado;
 import Modelo.Tablero;

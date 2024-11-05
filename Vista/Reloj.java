@@ -44,12 +44,9 @@ public class Reloj extends Thread {
         actualizarLabel();
     }
 
-//    public boolean isRunning() {
-//        return running;
-//    }
+
     private void actualizarLabel() {
         label.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos));
-//        SwingUtilities.invokeLater(() -> label.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos)));
     }
 
     @Override

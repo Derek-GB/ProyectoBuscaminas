@@ -408,7 +408,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         jLabel145.setForeground(new java.awt.Color(0, 0, 0));
         jLabel145.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel145.setText("30");
-        LabContadorBanderas.add(jLabel145, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 70, 40));
+        LabContadorBanderas.add(jLabel145, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 60, 30));
 
         labIcon.setForeground(new java.awt.Color(0, 0, 0));
         LabContadorBanderas.add(labIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 30, 30));

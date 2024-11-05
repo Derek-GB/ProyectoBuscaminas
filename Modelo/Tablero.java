@@ -4,8 +4,8 @@
  */
 package Modelo;
 
-import Interfaces.Observable;
-import Interfaces.Observador;
+import Modelo.Interfaces.Observable;
+import Modelo.Interfaces.Observador;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +24,6 @@ public class Tablero implements Observable {
         this.totalMinas = 30;
         this.casillas = new Casilla[filas][columnas];
         this.observadores = new ArrayList<>();
-//        inicializarTablero();
     }
 
     public void inicializarTablero() {
