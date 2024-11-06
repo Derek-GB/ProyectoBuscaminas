@@ -44,9 +44,12 @@ public class Reloj extends Thread {
         actualizarLabel();
     }
 
-
     private void actualizarLabel() {
         label.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos));
+    }
+    
+    public void finalizar(){
+        corriendo = false;
     }
 
     @Override

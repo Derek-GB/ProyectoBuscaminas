@@ -143,8 +143,8 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
         controlador.reiniciarJuego();
         busca.reiniciarCasillas();
         reloj.reiniciar();
-        busca.relojIniciado = false;
-        busca.contadorBanderas = 30;
+        busca.setRelojIniciado(false);
+        busca.reiniciarContadorBanderas();
         busca.setjLabel145("30");
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -158,6 +158,7 @@ public class FrmFinal extends javax.swing.JDialog implements Runnable {
         this.dispose();
         busca.dispose();
         busca.detenerSonido();
+        busca.detenerReloj();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

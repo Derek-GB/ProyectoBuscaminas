@@ -17,7 +17,7 @@ import Vista.FrmBuscaMinas;
  *
  * @author d2tod
  */
-public class BuscaMinasController implements Observador /*, MouseListener*/ {
+public class BuscaMinasController implements Observador {
 
     private Tablero tablero;
     private FrmBuscaMinas vista;
@@ -30,7 +30,6 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
     public void iniciarJuego() {
         tablero.inicializarTablero();
-//        vista.actualizarVista(tablero);
     }
 
     @Override
@@ -57,7 +56,6 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
     public void manejarMarcadoCasilla(int fila, int columna) {
         tablero.marcarCasilla(fila, columna);
-//        vista.actualizarVista(tablero);
     }
 
     public void manejarDestapadoCasilla(int fila, int columna) {
@@ -65,7 +63,6 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
         if (!tablero.hayMinasDestapadas() && !tablero.hayCasillasSinDestapar()) {
             verificarFinDeJuego(true);  
         }
-//        vista.actualizarVista(tablero);
     }
 
     public void verificarFinDeJuego(boolean victoria) {
@@ -78,7 +75,6 @@ public class BuscaMinasController implements Observador /*, MouseListener*/ {
 
     public void reiniciarJuego() {
         tablero.inicializarTablero();
-//        vista.actualizarVista(tablero);
     }
 
 }

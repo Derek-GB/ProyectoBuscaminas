@@ -41,10 +41,6 @@ public class Casilla {
         this.esMina = true;
     }
     
-    public void establecerEstado(Estado nuevoEstado) {
-        this.estado = nuevoEstado;
-    }
-    
     public void establecerNumero(int numero) {
         this.numero = numero;
     }

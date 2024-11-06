@@ -21,11 +21,11 @@ import javax.swing.JLabel;
  */
 public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
 
-    int contadorBanderas;
-    JLabel[][] casillas;
-    BuscaMinasController controlador;
-    Reloj reloj;
-    boolean relojIniciado;
+    private int contadorBanderas;
+    private JLabel[][] casillas;
+    private BuscaMinasController controlador;
+    private Reloj reloj;
+    private boolean relojIniciado;
 
     private volatile boolean running = true;
     private Clip clip;
@@ -79,6 +79,18 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         this.jLabel145.setText(nombre);
     }
 
+    public void setRelojIniciado(boolean relojIniciado){
+        this.relojIniciado = relojIniciado;
+    }
+    
+    public void reiniciarContadorBanderas(){
+        this.contadorBanderas = 30;
+    }
+    
+    public void detenerReloj(){
+        this.reloj.finalizar();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -421,7 +433,7 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabContadorBanderas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LabContadorBanderas, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
         );
 
         pack();
@@ -436,40 +448,6 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
         jLabel145.setText("30");
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmBuscaMinas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmBuscaMinas().setVisible(true);
-//            }
-//        });
-//    }
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!relojIniciado) {
@@ -482,8 +460,6 @@ public class FrmBuscaMinas extends javax.swing.JFrame implements MouseListener {
             if (posicion[0] == -1 || posicion[1] == -1) {
                 throw new UnsupportedOperationException("Wey, tenemos problemas");
             }
-            /*Estos eventos de mouse es por el MouseListener, pero solo se necesita
-        el mouse Clicked, este revisa cual de los dos clics se hizo y en base a eso actua*/
             switch (e.getButton()) {
                 case (MouseEvent.BUTTON1) -> {
 
